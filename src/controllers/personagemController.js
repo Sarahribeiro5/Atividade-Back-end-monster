@@ -1,18 +1,18 @@
 import PersonagemModel from "../models/personagemModel.js";
 
 class PersonagemController {
-  // GET /api/personagens
+  // GET /personagens
   async getAllPersonagens(req, res) {
     try {
       const personagens = await PersonagemModel.findAll();
       res.json(personagens);
     } catch (error) {
-      console.error("Erro ao buscar personagens:", error);
-      res.status(500).json({ error: "Erro ao buscar personagens" });
+      console.error("Erro ao buscar os personagens:", error);
+      res.status(500).json({ error: "Erro ao buscar os personagens" });
     }
   }
 
-  // GET /api/personagens/:id
+  // GET /personagens/:id
   async getPersonagemById(req, res) {
     try {
       const { id } = req.params;
@@ -20,96 +20,62 @@ class PersonagemController {
       const personagem = await PersonagemModel.findById(id);
 
       if (!personagem) {
-        return res.status(404).json({ error: "Personagem não encontrado" });
+        return res.status(404).json({ error: "Personagem não encontrado!" });
       }
 
       res.json(personagem);
     } catch (error) {
       console.error("Erro ao buscar personagem:", error);
-      res.status(500).json({ error: "Erro ao buscar personagem" });
+      res.status(500).json({ error: "Erro ao buscar personagem!" });
     }
   }
 
-  // POST /api/personagens
+  // POST /personagens
   async createPersonagem(req, res) {
     try {
       // Validação básica
-      const {
-        title,
-        description,
-        episodes,
-        releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl,
-      } = req.body;
+      const { nome, idade, caracteristicas } = req.body;
 
-      // Verifica se todos os campos do personagem foram fornecidos
-      if (
-        !title ||
-        !description ||
-        !episodes ||
-        !releaseYear ||
-        !studio ||
-        !genres ||
-        !rating ||
-        !imageUrl
-      ) {
-        return res
-          .status(400)
-          .json({ error: "Todos os campos são obrigatórios" });
+      // Verifica se todos os campos obrigatórios foram fornecidos
+      if (!nome || !idade || !caracteristicas) {
+        return res.status(400).json({
+          error: "Os campos nome, idade e características são obrigatórios",
+        });
       }
 
       // Criar o novo personagem
       const newPersonagem = await PersonagemModel.create(
-        title,
-        description,
-        episodes,
-        releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl
+        nome,
+        idade,
+        caracteristicas
       );
 
       if (!newPersonagem) {
         return res.status(400).json({ error: "Erro ao criar personagem" });
       }
 
-      res.status(201).json(newPersonagem);
+      res.status(201).json({
+        message: "Personagem criado com sucesso",
+        newPersonagem,
+      });
     } catch (error) {
       console.error("Erro ao criar personagem:", error);
       res.status(500).json({ error: "Erro ao criar personagem" });
     }
   }
 
-  // PUT /api/personagens/:id
+  // PUT /personagens/:id
   async updatePersonagem(req, res) {
     try {
       const { id } = req.params;
-      const {
-        title,
-        description,
-        episodes,
-        releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl,
-      } = req.body;
+      const { nome, idade, caracteristicas } = req.body;
 
       // Atualizar o personagem
       const updatedPersonagem = await PersonagemModel.update(
         id,
-        title,
-        description,
-        episodes,
-        releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl
+        nome,
+        idade,
+        caracteristicas
       );
 
       if (!updatedPersonagem) {
@@ -119,11 +85,11 @@ class PersonagemController {
       res.json(updatedPersonagem);
     } catch (error) {
       console.error("Erro ao atualizar personagem:", error);
-      res.status(500).json({ error: "Erro ao atualizar personagem" });
+      res.status(500).json({ error: "Erro ao atualizar personagem!" });
     }
   }
 
-  // DELETE /api/personagens/:id
+  // DELETE /personagens/:id
   async deletePersonagem(req, res) {
     try {
       const { id } = req.params;
@@ -132,13 +98,15 @@ class PersonagemController {
       const result = await PersonagemModel.delete(id);
 
       if (!result) {
-        return res.status(404).json({ error: "Personagem não encontrado" });
+        return res.status(404).json({ error: "Personagem não encontrado!" });
       }
 
-      res.status(204).end(); // Resposta sem conteúdo
+      res.status(200).json({
+        message: "Personagem removido com sucesso",
+      });
     } catch (error) {
       console.error("Erro ao remover personagem:", error);
-      res.status(500).json({ error: "Erro ao remover personagem" });
+      res.status(500).json({ error: "Erro ao remover personagem!" });
     }
   }
 }

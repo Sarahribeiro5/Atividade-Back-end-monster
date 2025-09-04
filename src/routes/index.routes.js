@@ -15,11 +15,12 @@ const router = express.Router();
 router.use("/auth", authRouter);
 router.use("/collections", collectionRouter);
 router.use("/cards", cardRouter);
+router.use("/personagens", personagensRouter);
 
 // Rotas protegidas
 router.use(authMiddleware);
 
 router.use("/animes", animesRouter);
-router.use("/personagens", personagensRouter);
+
 
 export default router;

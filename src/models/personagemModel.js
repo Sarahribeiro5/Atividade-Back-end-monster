@@ -9,8 +9,6 @@ class PersonagemModel {
       },
     });
 
-    console.log(personagens);
-
     return personagens;
   }
 
@@ -26,85 +24,38 @@ class PersonagemModel {
   }
 
   // Criar um novo personagem
-  async create(
-    title,
-    description,
-    episodes,
-    releaseYear,
-    studio,
-    genres,
-    rating,
-    imageUrl
-  ) {
-    const newPersonagem = await prisma.personagem.create({
+  async create(nome, idade, caracteristicas) {
+    const novoPersonagem = await prisma.personagem.create({
       data: {
-        title,
-        description,
-        episodes,
-        releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl,
+        nome,
+        idade,
+        características: caracteristicas,
       },
     });
 
-    return newPersonagem;
+    return novoPersonagem;
   }
 
   // Atualizar um personagem
-  async update(
-    id,
-    title,
-    description,
-    episodes,
-    releaseYear,
-    studio,
-    genres,
-    rating,
-    imageUrl
-  ) {
+  async update(id, nome, idade, caracteristicas) {
     const personagem = await this.findById(id);
 
     if (!personagem) {
       return null;
     }
 
-    // Atualize o personagem existente com os novos dados
-    const data = {};
-    if (title !== undefined) {
-      data.title = title;
-    }
-    if (description !== undefined) {
-      data.description = description;
-    }
-    if (episodes !== undefined) {
-      data.episodes = episodes;
-    }
-    if (releaseYear !== undefined) {
-      data.releaseYear = releaseYear;
-    }
-    if (studio !== undefined) {
-      data.studio = studio;
-    }
-    if (genres !== undefined) {
-      data.genres = genres;
-    }
-    if (rating !== undefined) {
-      data.rating = rating;
-    }
-    if (imageUrl !== undefined) {
-      data.imageUrl = imageUrl;
-    }
-
-    const personagemUpdated = await prisma.personagem.update({
+    const personagemAtualizado = await prisma.personagem.update({
       where: {
         id: Number(id),
       },
-      data,
+      data: {
+        nome: nome !== undefined ? nome : personagem.nome,
+        idade: idade !== undefined ? idade : personagem.idade,
+        características: caracteristicas !== undefined ? caracteristicas : personagem.características,
+      },
     });
 
-    return personagemUpdated;
+    return personagemAtualizado;
   }
 
   // Remover um personagem
