@@ -2,7 +2,6 @@ import express from "express";
 
 // Importar todas as rotas
 import authRouter from "./auth.routes.js";
-import animesRouter from "./animeRoutes.js";
 import personagensRouter from "./personagemRoutes.js";
 import collectionRouter from "./collectionRoutes.js";
 import cardRouter from "./cardRoutes.js";
@@ -19,8 +18,5 @@ router.use("/personagens", personagensRouter);
 
 // Rotas protegidas
 router.use(authMiddleware);
-
-router.use("/animes", animesRouter);
-
 
 export default router;
