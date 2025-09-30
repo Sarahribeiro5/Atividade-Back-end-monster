@@ -1,0 +1,11 @@
+{
+  "message": "Usuário criado com sucesso!",
+  "user": {
+    "id": 2,
+    "name": "sarah",
+    "email": "sarah.r.ribeiro@aluno.senai.br",
+    "password": "$2b$10$BWarqrpGhPtFQzucqt/uDe3rmvCTEDQmYGMnGJPMtDXQ4NovgaPeK",
+    "createdAt": "2025-09-30T17:31:31.790Z",
+    "updatedAt": "2025-09-30T17:31:31.790Z"
+  }
+}
