@@ -31,6 +31,7 @@ model Personagem {
   nome            String
   idade           Int
   características String
+  imagem          String
   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -44,6 +45,7 @@ model Filme {
   sinopse               String
   personagensPrincipais String
   dataLancamento        Int
+  imagem                String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

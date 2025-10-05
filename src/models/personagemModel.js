@@ -30,6 +30,7 @@ class PersonagemModel {
         nome,
         idade,
         características: caracteristicas,
+        imagem,
       },
     });
 
@@ -52,6 +53,7 @@ class PersonagemModel {
         nome: nome !== undefined ? nome : personagem.nome,
         idade: idade !== undefined ? idade : personagem.idade,
         características: caracteristicas !== undefined ? caracteristicas : personagem.características,
+        imagem: imagem !== undefined ? imagem : personagem.imagem,
       },
     });
 

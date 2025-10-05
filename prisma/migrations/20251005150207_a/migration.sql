@@ -14,6 +14,7 @@ CREATE TABLE "personagens" (
     "nome" TEXT NOT NULL,
     "idade" INTEGER NOT NULL,
     "características" TEXT NOT NULL,
+    "imagem" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );
@@ -25,6 +26,7 @@ CREATE TABLE "filmes" (
     "sinopse" TEXT NOT NULL,
     "personagensPrincipais" TEXT NOT NULL,
     "dataLancamento" INTEGER NOT NULL,
+    "Imagem" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );

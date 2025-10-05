@@ -22,20 +22,21 @@ class FilmeModel {
   }
 
   // Criar um novo filme
-  async create(titulo, sinopse, personagensPrincipais, dataLancamento) {
+  async create(titulo, sinopse, personagensPrincipais, dataLancamento, imagem) {
     const novoFilme = await prisma.filme.create({
       data: {
         titulo,
         sinopse,
         personagensPrincipais,
         dataLancamento,
+        imagem,
       },
     });
     return novoFilme;
   }
 
   // Atualizar um filme
-  async update(id, titulo, sinopse, personagensPrincipais, dataLancamento) {
+  async update(id, titulo, sinopse, personagensPrincipais, dataLancamento, imagem) {
     const filme = await this.findById(id);
     if (!filme) {
       return null;
@@ -50,6 +51,7 @@ class FilmeModel {
         sinopse: sinopse !== undefined ? sinopse : filme.sinopse,
         personagensPrincipais: personagensPrincipais !== undefined ? personagensPrincipais : filme.personagensPrincipais,
         dataLancamento: dataLancamento !== undefined ? dataLancamento : filme.dataLancamento,
+        imagem: imagem !== undefined ? imagem : filme.imagem,
       },
     });
     return filmeAtualizado;

@@ -32,15 +32,15 @@ class FilmeController {
   // POST /filmes
   async createFilme(req, res) {
     try {
-      const { titulo, sinopse, personagensPrincipais, dataLancamento } = req.body;
+      const { titulo, sinopse, personagensPrincipais, dataLancamento, imagem } = req.body;
 
-      if (!titulo || !sinopse || !personagensPrincipais || !dataLancamento) {
+      if (!titulo || !sinopse || !personagensPrincipais || !dataLancamento || !imagem) {
         return res.status(400).json({
-          error: "Os campos titulo, sinopse, personagensPrincipais e dataLancamento são obrigatórios",
+          error: "Os campos titulo, sinopse, personagensPrincipais, dataLancamento e imagem são obrigatórios",
         });
       }
 
-      const newFilme = await FilmeModel.create(titulo, sinopse, personagensPrincipais, dataLancamento);
+      const newFilme = await FilmeModel.create(titulo, sinopse, personagensPrincipais, dataLancamento, imagem);
 
       res.status(201).json({
         message: "Filme criado com sucesso",
@@ -56,9 +56,9 @@ class FilmeController {
   async updateFilme(req, res) {
     try {
       const { id } = req.params;
-      const { titulo, sinopse, personagensPrincipais, dataLancamento } = req.body;
+      const { titulo, sinopse, personagensPrincipais, dataLancamento, imagem } = req.body;
 
-      const updatedFilme = await FilmeModel.update(id, titulo, sinopse, personagensPrincipais, dataLancamento);
+      const updatedFilme = await FilmeModel.update(id, titulo, sinopse, personagensPrincipais, dataLancamento, imagem);
 
       if (!updatedFilme) {
         return res.status(404).json({ error: "Filme não encontrado" });
