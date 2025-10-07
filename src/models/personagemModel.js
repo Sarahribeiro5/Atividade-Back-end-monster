@@ -24,7 +24,7 @@ class PersonagemModel {
   }
 
   // Criar um novo personagem
-  async create(nome, idade, caracteristicas) {
+  async create(nome, idade, caracteristicas, imagem) {
     const novoPersonagem = await prisma.personagem.create({
       data: {
         nome,
@@ -38,7 +38,7 @@ class PersonagemModel {
   }
 
   // Atualizar um personagem
-  async update(id, nome, idade, caracteristicas) {
+  async update(id, nome, idade, caracteristicas, imagem) {
     const personagem = await this.findById(id);
 
     if (!personagem) {

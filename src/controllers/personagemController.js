@@ -34,12 +34,12 @@ class PersonagemController {
   async createPersonagem(req, res) {
     try {
       // Validação básica
-      const { nome, idade, características } = req.body;
+      const { nome, idade, características, imagem } = req.body;
 
       // Verifica se todos os campos obrigatórios foram fornecidos
-      if (!nome || !idade || !características) {
+      if (!nome || !idade || !características || !imagem) {
         return res.status(400).json({
-          error: "Os campos nome, idade e características são obrigatórios",
+          error: "Os campos nome, idade, características e imagem são obrigatórios",
         });
       }
 
@@ -47,7 +47,8 @@ class PersonagemController {
       const newPersonagem = await PersonagemModel.create(
         nome,
         idade,
-        características
+        características,
+        imagem
       );
 
       if (!newPersonagem) {
@@ -68,14 +69,15 @@ class PersonagemController {
   async updatePersonagem(req, res) {
     try {
       const { id } = req.params;
-      const { nome, idade, características } = req.body;
+      const { nome, idade, características, imagem } = req.body;
 
       // Atualizar o personagem
       const updatedPersonagem = await PersonagemModel.update(
         id,
         nome,
         idade,
-        características
+        características,
+        imagem
       );
 
       if (!updatedPersonagem) {
